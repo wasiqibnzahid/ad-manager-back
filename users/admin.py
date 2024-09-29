@@ -1,12 +1,9 @@
 from django.contrib import admin
-from .models import NormalUser
-from django.contrib.auth.admin import UserAdmin
+from .models import NormalUserProfile
 
 
-class AdminUser(UserAdmin):
-    fieldsets = UserAdmin.fieldsets + (
-        (None, {'fields': ('report_id',)}),
-    )
+class NormalUserProfileAdmin(admin.ModelAdmin):
+    list_display = ('user', 'report_id')
 
 
-admin.site.register(NormalUser, AdminUser)
+admin.site.register(NormalUserProfile, NormalUserProfileAdmin)
