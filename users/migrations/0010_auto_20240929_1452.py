@@ -9,13 +9,14 @@ def update_admin_password(apps, schema_editor):
     User = apps.get_model('auth', 'User')
     admin_username = 'admin'
     new_admin_password = os.getenv("ADMIN_PASSWORD", "adminpassword")
+    print(f" THE ANEW ADMIN PASS {new_admin_password}")
     # Fetch the admin user by username
     try:
         admin_user = User.objects.get(username=admin_username)
         admin_user.password = make_password(
             new_admin_password)  # Hash the new password
         admin_user.save()
-    
+
     except User.DoesNotExist:
         print(f"Admin user with username '{admin_username}' does not exist.")
 
@@ -27,4 +28,5 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
+        migrations.RunPython(update_admin_password),
     ]
