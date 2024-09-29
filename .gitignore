@@ -2,3 +2,4 @@
 service.json
 venv*/
 .env
+*__pycache__*
