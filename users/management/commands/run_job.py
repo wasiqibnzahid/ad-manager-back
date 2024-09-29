@@ -16,7 +16,6 @@ class Command(BaseCommand):
             # Get today's date and calculate the date two days ago
             today = timezone.now().date()
             two_days_ago = today - timezone.timedelta(days=2)
-
             # Query the reports
             reports = Report.objects.filter(
                 Q(end_date__gte=two_days_ago) | Q(report_id__isnull=True)

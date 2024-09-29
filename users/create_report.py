@@ -8,10 +8,11 @@ import csv
 import gzip
 from .models import Report, Record
 from googleads import ad_manager
-from datetime import datetime
+from datetime import datetime, timedelta
 from dateutil import parser  # Make sure to import the dateutil parser
 import pandas as pd
 import os
+from django.utils import timezone
 
 client = ad_manager.AdManagerClient.LoadFromStorage("~/googleads.yaml")
 
@@ -45,7 +46,12 @@ def fetch_ad_units():
 
 def process_report(id, start_date, end_date, ad_unit_ids, cpm_rate):
     client = ad_manager.AdManagerClient.LoadFromStorage("~/googleads.yaml")
+    today = timezone.now().date()
 
+# Check if the given date is equal to or greater than today
+    if end_date >= today:
+        # If it is today or a future date, change it to yesterday
+        end_date = today - timedelta(days=1)
     report_job = {
         "reportQuery": {
             "dimensions": [

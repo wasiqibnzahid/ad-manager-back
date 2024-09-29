@@ -15,7 +15,7 @@ class UsersConfig(AppConfig):
             return
 
         scheduler = BackgroundScheduler()
-        scheduler.add_job(self.run_periodic_task, 'interval', hours=6)
+        scheduler.add_job(self.run_periodic_task, 'interval', hours=24)
         scheduler.start()
 
     def run_periodic_task(self):
