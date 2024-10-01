@@ -11,6 +11,7 @@ from .models import Report, Record
 from .create_report import process_report, fetch_ad_units
 from threading import Thread
 from .models import NormalUserProfile
+from django.contrib.auth.models import User
 
 
 @api_view(['GET'])
@@ -42,6 +43,23 @@ def create_user(request):
         serializer.save()
         return Response({'message': 'User created successfully'}, status=status.HTTP_201_CREATED)
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+@api_view(['POST'])
+@permission_classes([IsAdminUser])
+def update_user(request):
+    data = request.data
+    user = NormalUserProfile.objects.get(pk=data["id"])
+
+    if (user):
+        user.report_id = data["report_id"]
+        user.save()
+        user = user.user
+        user.username = data["username"]
+        if (data['password']):
+            user.set_password(data["password"])
+        user.save()
+        return Response({'message': 'User updated successfully'}, status=status.HTTP_201_CREATED)
 
 
 @api_view(['POST'])
@@ -100,7 +118,7 @@ def list_users(request):
 
 
 @api_view(["GET"])
-@permission_classes([IsAdminUser])
+@permission_classes([IsAuthenticated])
 def list_reports(request):
     reports = Report.objects.all()
     serializer = ReportSerializer(reports, many=True)

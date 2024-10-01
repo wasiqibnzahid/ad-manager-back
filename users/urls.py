@@ -5,6 +5,7 @@ from . import views
 urlpatterns = [
     path('login', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('admin/create-user', views.create_user, name='create_user'),
+    path('admin/update-user', views.update_user, name='update_user'),
     path("user", views.user_info_view, name="user_info"),
     path("report", views.create_report, name="report"),
     path("ad_units", views.get_ad_units, name="ad_units"),
