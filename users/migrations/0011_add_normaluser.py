@@ -24,7 +24,7 @@ def update_admin(apps, schema_editor):
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('users', '0009_alter_normaluserprofile_report_id'),
+        ('users', '0010_ADE'),
     ]
 
     operations = [
