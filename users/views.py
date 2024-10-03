@@ -53,13 +53,9 @@ def create_user(request):
 @permission_classes([IsAdminUser])
 def update_user(request):
     data = request.data
-    is_admin = request.data["is_admin"]
 
     user = NormalUserProfile.objects.get(pk=data["id"])
-    if (is_admin):
-        user.user.is_staff = True
-    else:
-        user.user.is_staff = False
+    user.user.is_staff = False
     if (user):
         user.report_id = data["report_id"]
         user.save()
