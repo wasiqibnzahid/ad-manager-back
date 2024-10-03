@@ -4,9 +4,9 @@ from django.db import migrations
 from django.contrib.auth.hashers import make_password
 import os
 from users.models import NormalUserProfile
+from django.contrib.auth.models import User
 
 def update_admin(apps, schema_editor):
-    User = apps.get_model('auth', 'User')
     admin_username = 'admin'
     new_admin_password = os.getenv("ADMIN_PASSWORD", "adminpassword")
     # Fetch the admin user by username
