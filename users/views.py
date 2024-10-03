@@ -38,7 +38,10 @@ def create_user(request):
     data = request.data
     data["report_id"] = data.get("report_id", None)
     data["is_admin"] = data.get("is_admin", False)
-    print(f"ASDASDASD AM EHE FIRST FIRST")
+    if (data["is_admin"]):
+        User.objects.create_superuser(
+            username=data["username"], password=data["password"])
+        return Response({"status": "success"})
     serializer = NormalUserSerializer(data=request.data)
     if serializer.is_valid():
         serializer.save()
@@ -50,8 +53,13 @@ def create_user(request):
 @permission_classes([IsAdminUser])
 def update_user(request):
     data = request.data
-    user = NormalUserProfile.objects.get(pk=data["id"])
+    is_admin = request.data["is_admin"]
 
+    user = NormalUserProfile.objects.get(pk=data["id"])
+    if (is_admin):
+        user.user.is_staff = True
+    else:
+        user.user.is_staff = False
     if (user):
         user.report_id = data["report_id"]
         user.save()
