@@ -63,6 +63,7 @@ def update_user(request):
         user = user.user
         user.is_staff = data["is_admin"]
         user.is_admin = data["is_admin"]
+        user.is_superuser = data["is_admin"]
         user.username = data["username"]
         if (data['password']):
             user.set_password(data["password"])
