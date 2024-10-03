@@ -21,7 +21,7 @@ def user_info_view(request):
     response = {
         'username': request.user.username,
         'email': request.user.email,
-        'is_admin': request.user.is_superuser,
+        'is_admin': request.user.is_staff,
     }
     if (response["is_admin"] == False):
         print(f"RARARA, {request.user}")
