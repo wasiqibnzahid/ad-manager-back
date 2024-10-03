@@ -1,5 +1,8 @@
 from django.apps import AppConfig
 from apscheduler.schedulers.background import BackgroundScheduler
+from apscheduler.triggers.interval import IntervalTrigger
+from datetime import datetime, timedelta
+
 from django.core.management import call_command
 import logging
 import os
@@ -15,7 +18,9 @@ class UsersConfig(AppConfig):
             return
 
         scheduler = BackgroundScheduler()
-        scheduler.add_job(self.run_periodic_task, 'interval', hours=24)
+        scheduler.add_job(self.run_periodic_task, IntervalTrigger(
+            # + timedelta(weeks=1)
+            days=1))
         scheduler.start()
 
     def run_periodic_task(self):
