@@ -36,8 +36,7 @@ class LoginSerializer(serializers.Serializer):
 class NormalUserProfileSerializer(serializers.ModelSerializer):
     # Get username from related User model
     username = serializers.CharField(source='user.username')
-    is_admin = serializers.CharField(source='user.is_staff')
-
+ 
     class Meta:
         model = NormalUserProfile
         # Include fields you want to serialize
