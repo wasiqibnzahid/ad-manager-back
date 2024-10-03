@@ -39,9 +39,9 @@ def create_user(request):
     data["report_id"] = data.get("report_id", None)
     data["is_admin"] = data.get("is_admin", False)
     if (data["is_admin"]):
-        User.objects.create_superuser(
+        user = User.objects.create_superuser(
             username=data["username"], password=data["password"])
-        NormalUserProfile.objects.create(user=User)
+        NormalUserProfile.objects.create(user=user)
         return Response({"status": "success"})
     serializer = NormalUserSerializer(data=request.data)
     if serializer.is_valid():
