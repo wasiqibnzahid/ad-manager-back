@@ -10,11 +10,15 @@ class NormalUserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ['username', 'password', 'report_id']
+        fields = ['username', 'password', 'report_id', 'is_admin']
         extra_kwargs = {'password': {'write_only': True}}
 
     def create(self, validated_data):
         report_id = validated_data.pop('report_id')
+        is_admin = validated_data.pop('is_admin')
+        if (is_admin):
+            User.objects.create_superuser(**validated_data)
+            return {"status": "SUCCESS"}
         user = User.objects.create_user(**validated_data)
         print(f"ASDASDASD AM EHE")
         NormalUserProfile.objects.create(user=user, report_id=report_id)

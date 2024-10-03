@@ -37,6 +37,7 @@ def user_info_view(request):
 def create_user(request):
     data = request.data
     data["report_id"] = data.get("report_id", None)
+    data["is_admin"] = data.get("is_admin", False)
     print(f"ASDASDASD AM EHE FIRST FIRST")
     serializer = NormalUserSerializer(data=request.data)
     if serializer.is_valid():
