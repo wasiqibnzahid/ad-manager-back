@@ -59,6 +59,8 @@ def update_user(request):
     
     if (user):
         user.report_id = data["report_id"]
+        if(data["is_admin"]):
+            user.report_id = None
         user.save()
         user = user.user
         user.is_staff = data["is_admin"]
