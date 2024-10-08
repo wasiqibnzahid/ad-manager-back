@@ -18,7 +18,7 @@ class Report(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     cpm_rate = models.FloatField(null=True)
     status = models.CharField(
-        max_length=20, default='Processing')  # New field for status
+        max_length=20, default='Processing') 
     name = models.CharField(default="", max_length=255)
     def __str__(self):
         return f"Report {self.start_date} - {self.end_date}"
