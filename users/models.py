@@ -20,7 +20,6 @@ class Report(models.Model):
     status = models.CharField(
         max_length=20, default='Processing')  # New field for status
     name = models.CharField(default="", max_length=255)
-    report_id = models.CharField(null=True, max_length=255)
     def __str__(self):
         return f"Report {self.start_date} - {self.end_date}"
 
