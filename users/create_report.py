@@ -98,7 +98,6 @@ def process_report(id, start_date, end_date, ad_unit_ids, cpm_rate):
     try:
         # Process the CSV file and save each record
         report = Report.objects.get(id=id)
-        Record.objects.filter(report=report).delete()
         df = pd.read_csv(report_file.name, compression='gzip')
         for _index, row in df.iterrows():
             # Headers are used by default

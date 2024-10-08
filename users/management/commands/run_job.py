@@ -15,20 +15,17 @@ class Command(BaseCommand):
         try:
             # Get today's date and calculate the date two days ago
             today = timezone.now().date()
+            one_day_ago = today - timezone.timedelta(days=1)
             two_days_ago = today - timezone.timedelta(days=2)
-            # Query the reports
-            reports = Report.objects.filter(
-                Q(end_date__gte=two_days_ago) | Q(report_id__isnull=True)
-            )
+            reports = Report.objects.all()
 
             # Process each report
             for report in reports:
                 print(f"PROCESSING {report}")
-                # Call the process_report function with the required parameters
-                process_report(report.report_id, report.start_date,
-                               two_days_ago, report.ad_unit_ids, report.cpm_rate)
-
-                # Log that the report has been processed
+                process_report(report.pk, two_days_ago,
+                               one_day_ago, report.ad_unit_ids, report.cpm_rate)
+                report.end_date = one_day_ago
+                report.save()
                 print(f"Processed Report: {report}")
         except Exception as e:
             print(f"JOB FAILED - Error: {e}")
