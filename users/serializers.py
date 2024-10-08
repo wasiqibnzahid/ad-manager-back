@@ -15,7 +15,6 @@ class NormalUserSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         report_id = validated_data.pop('report_id')
-        is_admin = validated_data.pop('is_admin')
         user = User.objects.create_user(**validated_data)
         print(f"ASDASDASD AM EHE")
         NormalUserProfile.objects.create(user=user, report_id=report_id)
