@@ -44,7 +44,7 @@ def fetch_ad_units():
     return results
 
 
-def process_report(id, start_date, end_date, ad_unit_ids, cpm_rate):
+def process_report(id, start_date, end_date, ad_unit_ids , cpm_rate):
     client = ad_manager.AdManagerClient.LoadFromStorage("~/googleads.yaml")
     today = timezone.now().date()
     print(f"R {ad_unit_ids}");
