@@ -17,13 +17,13 @@ class Command(BaseCommand):
             # Get today's date and calculate the date two days ago
             today = timezone.now().date()
             one_day_ago = today - timezone.timedelta(days=1)
-            two_days_ago = today - timezone.timedelta(days=2)
+            three_days_ago = today - timezone.timedelta(days=3)
             reports = Report.objects.all()
             self.log()
             # Process each report
             for report in reports:
                 print(f"PROCESSING {report}")
-                process_report(report.pk, report.start_date,
+                process_report(report.pk, three_days_ago,
                                one_day_ago, report.ad_unit_ids.split(","), report.cpm_rate, report.name)
                 report.end_date = one_day_ago
                 report.save()
