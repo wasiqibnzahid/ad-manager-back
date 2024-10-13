@@ -27,7 +27,7 @@ class Command(BaseCommand):
                                one_day_ago, report.ad_unit_ids.split(","), report.cpm_rate, report.name)
                 report.end_date = one_day_ago
                 report.save()
-                log_file_path = '~/job_log.txt'
+                log_file_path = '/root/job_log.txt'
                 current_time = datetime.datetime.now()
                 timestamp = current_time.strftime("%Y-%m-%d %H:%M:%S")
                 with open(log_file_path, 'a') as file:
@@ -40,7 +40,7 @@ class Command(BaseCommand):
         current_time = datetime.datetime.now()
 
         timestamp = current_time.strftime("%Y-%m-%d %H:%M:%S")
-        log_file_path = '~/job_log.txt'
+        log_file_path = '/root/job_log.txt'
         with open(log_file_path, 'a') as file:
             file.write(f"Job ran on: {timestamp}\n")
 
