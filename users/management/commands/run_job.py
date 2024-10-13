@@ -36,7 +36,7 @@ class Command(BaseCommand):
         except Exception as e:
             print(f"JOB FAILED - Error: {e}")
 
-    def log():
+    def log(self):
         current_time = datetime.datetime.now()
 
         timestamp = current_time.strftime("%Y-%m-%d %H:%M:%S")
