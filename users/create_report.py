@@ -47,7 +47,6 @@ def fetch_ad_units():
 def process_report(id, start_date, end_date, ad_unit_ids, cpm_rate):
     client = ad_manager.AdManagerClient.LoadFromStorage("~/googleads.yaml")
     today = timezone.now().date()
-
 # Check if the given date is equal to or greater than today
     if end_date >= today:
         # If it is today or a future date, change it to yesterday
@@ -79,7 +78,6 @@ def process_report(id, start_date, end_date, ad_unit_ids, cpm_rate):
         }
     }
     print(f"report_job {report_job}")
-    return;
     if len(ad_unit_ids) > 0:
         # Build the WHERE statement using ad_unit_ids
         statement = (ad_manager.StatementBuilder(version='v202408')
@@ -88,11 +86,9 @@ def process_report(id, start_date, end_date, ad_unit_ids, cpm_rate):
                      .Offset(None))
         report_job["reportQuery"]["statement"] = statement.ToStatement()
 
-    # Initialize the DataDownloader and run the report
     report_downloader = client.GetDataDownloader(version='v202408')
     report_job_id = report_downloader.WaitForReport(report_job)
 
-    # Temporary file for storing the downloaded report
 
     with tempfile.NamedTemporaryFile(suffix='.csv.gz', mode='wb', delete=False) as report_file:
         report_downloader.DownloadReportToFile(
