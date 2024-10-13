@@ -84,7 +84,7 @@ def process_report(id, start_date, end_date, ad_unit_ids, cpm_rate):
                      .Limit(None)
                      .Offset(None))
         report_job["reportQuery"]["statement"] = statement.ToStatement()
-    print(f"report_job {report_job}")
+    print(f"report_job {report_job["reportQuery"]["statement"]["query"]}")
     return;
     report_downloader = client.GetDataDownloader(version='v202408')
     report_job_id = report_downloader.WaitForReport(report_job)
