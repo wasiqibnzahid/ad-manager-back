@@ -47,7 +47,7 @@ def fetch_ad_units():
 def process_report(id, start_date, end_date, ad_unit_ids , cpm_rate):
     client = ad_manager.AdManagerClient.LoadFromStorage("~/googleads.yaml")
     today = timezone.now().date()
-    print(f"R {ad_unit_ids}");
+    print(f"R {ad_unit_ids} {isinstance(ad_unit_ids, str)} {isinstance(ad_unit_ids, list)}");
     return;
 # Check if the given date is equal to or greater than today
     if end_date >= today:

@@ -23,7 +23,7 @@ class Command(BaseCommand):
             for report in reports:
                 print(f"PROCESSING {report}")
                 process_report(report.pk, report.start_date,
-                               one_day_ago, report.ad_unit_ids, report.cpm_rate)
+                               one_day_ago, report.ad_unit_ids.split(","), report.cpm_rate)
                 report.end_date = one_day_ago
                 report.save()
                 print(f"Processed Report: {report}")
