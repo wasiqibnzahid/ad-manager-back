@@ -77,7 +77,6 @@ def process_report(id, start_date, end_date, ad_unit_ids, cpm_rate):
             }
         }
     }
-    print(f"report_job {report_job}")
     if len(ad_unit_ids) > 0:
         # Build the WHERE statement using ad_unit_ids
         statement = (ad_manager.StatementBuilder(version='v202408')
@@ -85,7 +84,7 @@ def process_report(id, start_date, end_date, ad_unit_ids, cpm_rate):
                      .Limit(None)
                      .Offset(None))
         report_job["reportQuery"]["statement"] = statement.ToStatement()
-
+    print(f"report_job {report_job}")
     report_downloader = client.GetDataDownloader(version='v202408')
     report_job_id = report_downloader.WaitForReport(report_job)
 
