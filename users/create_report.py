@@ -49,9 +49,7 @@ def process_report(id, start_date, end_date, ad_unit_ids , cpm_rate, name=None):
     today = timezone.now().date()
     print(f"R {ad_unit_ids} report id {id} report name {name}");
 # Check if the given date is equal to or greater than today
-    if end_date >= today:
-        # If it is today or a future date, change it to yesterday
-        end_date = today - timedelta(days=1)
+    end_date = today - timedelta(days=1)
     report_job = {
         "reportQuery": {
             "dimensions": [
