@@ -51,7 +51,7 @@ def process_report(id, start_date, end_date, ad_unit_ids , cpm_rate, name=None):
 # Check if the given date is equal to or greater than today
     if end_date >= today:
         # If it is today or a future date, change it to yesterday
-        end_date = today - timedelta(days=2)
+        end_date = today - timedelta(days=1)
     report_job = {
         "reportQuery": {
             "dimensions": [
