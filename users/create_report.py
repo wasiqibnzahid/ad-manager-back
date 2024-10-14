@@ -90,6 +90,7 @@ def process_report(id, start_date, end_date, ad_unit_ids, cpm_rate, name=None):
     with tempfile.NamedTemporaryFile(suffix='.csv.gz', mode='wb', delete=False) as report_file:
         report_downloader.DownloadReportToFile(
             report_job_id, 'CSV_DUMP', report_file)
+        print(f"FILE IS {report_file.name}")
         try:
             # Process the CSV file and save each record
             report = Report.objects.get(id=id)
