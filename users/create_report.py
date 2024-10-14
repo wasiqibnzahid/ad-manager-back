@@ -126,5 +126,6 @@ def process_report(id, start_date, end_date, ad_unit_ids, cpm_rate, name=None):
             print(f"REPORT {report}")
             report.save()
         finally:
-            if (os.path.exists(report_file.name)):
-                os.remove(report_file.name)
+            print(f"{report_file.name}")
+            # if (os.path.exists(report_file.name)):
+            #     os.remove(report_file.name)
