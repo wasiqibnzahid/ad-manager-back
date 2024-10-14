@@ -36,4 +36,4 @@ class Record(models.Model):
     revenue = models.CharField(default="0", max_length=100)
 
     def __str__(self):
-        return f"Record for {self.report} on {self.date} - value {self.impressions} for unit - {self.ad_unit_name}"
+        return f"Record for {self.report.name} on {self.date} - value {self.impressions} for unit - {self.ad_unit_name}"
