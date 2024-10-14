@@ -18,20 +18,23 @@ class Command(BaseCommand):
             today = timezone.now().date()
             one_day_ago = today - timezone.timedelta(days=1)
             three_days_ago = today - timezone.timedelta(days=3)
-            reports = Report.objects.filter(name="Kaler Kantho").get()
+            reports = Report.objects.all()
             self.log()
             # Process each report
             for report in reports:
+                if (report.pk != 9):
+                    continue
                 print(f"PROCESSING {report}")
                 process_report(report.pk, report.start_date,
-                               one_day_ago, report.ad_unit_ids.split(","), report.cpm_rate)
+                               one_day_ago, report.ad_unit_ids.split(","), report.cpm_rate, report.name)
                 report.end_date = one_day_ago
                 report.save()
                 log_file_path = '/root/job_log.txt'
                 current_time = datetime.datetime.now()
                 timestamp = current_time.strftime("%Y-%m-%d %H:%M:%S")
                 with open(log_file_path, 'a') as file:
-                    file.write(f"Job finished for {one_day_ago} for report {report.pk} {report.name}: {timestamp}\n")
+                    file.write(f"Job finished for {one_day_ago} for report {
+                               report.pk} {report.name}: {timestamp}\n")
                 print(f"Processed Report: {report}")
         except Exception as e:
             print(f"JOB FAILED - Error: {e}")
