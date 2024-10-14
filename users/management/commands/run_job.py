@@ -18,7 +18,7 @@ class Command(BaseCommand):
             today = timezone.now().date()
             one_day_ago = today - timezone.timedelta(days=1)
             three_days_ago = today - timezone.timedelta(days=3)
-            reports = Report.objects.all()
+            reports = Report.objects.filter(__name__="Kaler Kantho")
             self.log()
             # Process each report
             for report in reports:
