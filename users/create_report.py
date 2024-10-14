@@ -87,7 +87,7 @@ def process_report(id, start_date, end_date, ad_unit_ids, cpm_rate, name=None):
     report_downloader = client.GetDataDownloader(version='v202408')
     report_job_id = report_downloader.WaitForReport(report_job)
 
-    with tempfile.NamedTemporaryFile(suffix='.csv.gz', mode='wb', delete=False) as report_file:
+    with open("/root/report.csv.gz", 'wb') as report_file:
         report_downloader.DownloadReportToFile(
             report_job_id, 'CSV_DUMP', report_file)
         print(f"FILE IS {report_file.name}")
