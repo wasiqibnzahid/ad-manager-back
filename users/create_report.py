@@ -123,7 +123,7 @@ def process_report(id, start_date, end_date, ad_unit_ids, cpm_rate):
                     'revenue': str(revenue),
                 }
             )
-            print(f"REPORT {rec}")
+            print(f"REPORT: Start: {start_date}, end: {end_date}, {rec}")
         report.status = 'Done'
         report.save()
     finally:
