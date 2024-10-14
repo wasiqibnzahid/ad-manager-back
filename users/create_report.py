@@ -76,6 +76,7 @@ def process_report(id, start_date, end_date, ad_unit_ids, cpm_rate, name=None):
             }
         }
     }
+    print(f"REPORT QUERY {report_job['reportQuery']}")
     if len(ad_unit_ids) > 0:
         # Build the WHERE statement using ad_unit_ids
         statement = (ad_manager.StatementBuilder(version='v202408')
