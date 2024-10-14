@@ -94,6 +94,7 @@ def process_report(id, start_date, end_date, ad_unit_ids, cpm_rate, name=None):
         # Process the CSV file and save each record
         report = Report.objects.get(id=id)
         df = pd.read_csv(report_file.name, compression='gzip')
+        print(f"AAA {df}")
         for _index, row in df.iterrows():
             # Headers are used by default
 
