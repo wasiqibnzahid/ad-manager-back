@@ -111,7 +111,7 @@ def process_report(id, start_date, end_date, ad_unit_ids, cpm_rate):
             # Calculate revenue using the formula (cpm_rate * impressions) / 1000
             revenue = (cpm_rate * impressions) / 1000
             # Save the record in the database
-            Record.objects.update_or_create(
+            rec = Record.objects.update_or_create(
                 report=report,
                 date=date,
                 ad_unit_id=ad_unit_id,
@@ -123,6 +123,7 @@ def process_report(id, start_date, end_date, ad_unit_ids, cpm_rate):
                     'revenue': str(revenue),
                 }
             )
+            print(f"REPORT {rec}")
         report.status = 'Done'
         report.save()
     finally:
