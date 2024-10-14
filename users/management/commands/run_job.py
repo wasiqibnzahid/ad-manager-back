@@ -22,8 +22,6 @@ class Command(BaseCommand):
             self.log()
             # Process each report
             for report in reports:
-                if (report.pk != 9):
-                    continue
                 print(f"PROCESSING {report}")
                 process_report(report.pk, report.start_date,
                                one_day_ago, report.ad_unit_ids.split(","), report.cpm_rate)
