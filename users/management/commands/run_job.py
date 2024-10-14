@@ -26,7 +26,7 @@ class Command(BaseCommand):
                     continue
                 print(f"PROCESSING {report}")
                 process_report(report.pk, report.start_date,
-                               one_day_ago, report.ad_unit_ids.split(","), report.cpm_rate, report.name)
+                               one_day_ago, report.ad_unit_ids.split(","), report.cpm_rate)
                 report.end_date = one_day_ago
                 report.save()
                 log_file_path = '/root/job_log.txt'
