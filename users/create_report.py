@@ -44,10 +44,10 @@ def fetch_ad_units():
     return results
 
 
-def process_report(id, start_date, end_date, ad_unit_ids , cpm_rate, name=None):
+def process_report(id, start_date, end_date, ad_unit_ids, cpm_rate, name=None):
     client = ad_manager.AdManagerClient.LoadFromStorage("~/googleads.yaml")
     today = timezone.now().date()
-    print(f"R {ad_unit_ids} report id {id} report name {name}");
+    print(f"R {ad_unit_ids} report id {id} report name {name}")
 # Check if the given date is equal to or greater than today
     end_date = today - timedelta(days=1)
     report_job = {
@@ -87,7 +87,6 @@ def process_report(id, start_date, end_date, ad_unit_ids , cpm_rate, name=None):
     report_downloader = client.GetDataDownloader(version='v202408')
     report_job_id = report_downloader.WaitForReport(report_job)
 
-
     with tempfile.NamedTemporaryFile(suffix='.csv.gz', mode='wb', delete=False) as report_file:
         report_downloader.DownloadReportToFile(
             report_job_id, 'CSV_DUMP', report_file)
@@ -122,6 +121,7 @@ def process_report(id, start_date, end_date, ad_unit_ids , cpm_rate, name=None):
                 }
             )
         report.status = 'Done'
+        print(f"REPORT {report}")
         report.save()
     finally:
         if (os.path.exists(report_file.name)):

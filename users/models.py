@@ -18,8 +18,9 @@ class Report(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
     cpm_rate = models.FloatField(null=True)
     status = models.CharField(
-        max_length=20, default='Processing') 
+        max_length=20, default='Processing')
     name = models.CharField(default="", max_length=255)
+
     def __str__(self):
         return f"Report {self.start_date} - {self.end_date}"
 
@@ -35,4 +36,4 @@ class Record(models.Model):
     revenue = models.CharField(default="0", max_length=100)
 
     def __str__(self):
-        return f"Record for {self.report} on {self.date}"
+        return f"Record for {self.report} on {self.date} - value {self.impressions} for unit - {self.ad_unit_name}"
