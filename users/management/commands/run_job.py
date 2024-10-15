@@ -14,23 +14,22 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         try:
-            # Get today's date and calculate the date two days ago
             today = timezone.now().date()
-            two_days_ago = today - timezone.timedelta(days=2)
+            three_days_ago = today - timezone.timedelta(days=3)
             reports = Report.objects.all()
             self.log()
             # Process each report
             for report in reports:
                 print(f"PROCESSING {report}")
-                process_report(report.pk, two_days_ago,
-                               two_days_ago, report.ad_unit_ids.split(","), report.cpm_rate)
-                report.end_date = two_days_ago
+                process_report(report.pk, three_days_ago,
+                               three_days_ago, report.ad_unit_ids.split(","), report.cpm_rate)
+                report.end_date = three_days_ago
                 report.save()
                 log_file_path = '/root/job_log.txt'
                 current_time = datetime.datetime.now()
                 timestamp = current_time.strftime("%Y-%m-%d %H:%M:%S")
                 with open(log_file_path, 'a') as file:
-                    file.write(f"Job finished for {two_days_ago} for report {
+                    file.write(f"Job finished for {three_days_ago} for report {
                                report.pk} {report.name}: {timestamp}\n")
                 print(f"Processed Report: {report}")
         except Exception as e:

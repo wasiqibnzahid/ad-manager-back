@@ -46,10 +46,10 @@ def fetch_ad_units():
 
 def process_report(id, start_date, end_date, ad_unit_ids, cpm_rate):
     client = ad_manager.AdManagerClient.LoadFromStorage("~/googleads.yaml")
-    today = timezone.now().date()
-
+    today = timezone.now() + timedelta(hours=5)
+    today = today.date()
 # Check if the given date is equal to or greater than today
-    end_date = today
+    end_date = today - timedelta(days=1)
     report_job = {
         "reportQuery": {
             "dimensions": [
