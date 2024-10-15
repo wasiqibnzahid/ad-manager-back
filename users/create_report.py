@@ -126,6 +126,8 @@ def process_report(id, start_date, end_date, ad_unit_ids, cpm_rate):
             print(f"REPORT: Start: {start_date}, end: {end_date}, {rec}")
         report.status = 'Done'
         report.save()
+    except Exception as e:
+        print(f"ERROR: {e}")
     finally:
         if (os.path.exists(report_file.name)):
             os.remove(report_file.name)
