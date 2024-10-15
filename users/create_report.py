@@ -69,11 +69,11 @@ def process_report(id, start_date, end_date, ad_unit_ids, cpm_rate):
                 "month": start_date.month,
                 "day": start_date.day
             },
-            "endDate": {
-                "year": end_date.year,
-                "month": end_date.month,
-                "day": end_date.day
-            }
+            # "endDate": {
+            #     "year": end_date.year,
+            #     "month": end_date.month,
+            #     "day": end_date.day
+            # }
         }
     }
     if len(ad_unit_ids) > 0:
